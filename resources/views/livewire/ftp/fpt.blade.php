@@ -51,26 +51,28 @@
                 </thead>
                 <tbody>
                     @foreach ($archivos as $archivo)
-                        <tr
-                            class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $archivo['name'] }}
-                            </th>
-                            <td class="px-6 py-4">
-                                {{ $archivo['type'] }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $archivo['size'] }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $data_connection['host'] }}
-                            </td>
-                            <td class="px-6 py-4">
-                                <a href="#"
-                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                            </td>
-                        </tr>
+                    <tr
+                        class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{ $archivo['name'] }}
+                        </th>
+                        <td class="px-6 py-4">
+                            @if ($archivo['type'] == 'directory')
+                            <a wire:click="entryDirectory('{{ $archivo['name'] }}')">kkk</a>
+                            {{ $archivo['type'] }}
+                            @endif
+                        </td>
+
+                        <td class="px-6 py-4">
+                            {{ $archivo['size'] }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $data_connection['host'] }}
+                        </td>
+                        <td class="px-6 py-4">
+                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                        </td>
+                    </tr>
                     @endforeach
 
                 </tbody>

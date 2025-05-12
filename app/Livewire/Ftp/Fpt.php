@@ -4,18 +4,20 @@ namespace App\Livewire\Ftp;
 
 use Livewire\Component;
 use App\Services\FtpsService;
+use Livewire\Attributes\On;
 
 class Fpt extends Component
 
 {
+    protected $listeners = ['post-created'=>'post-created'];
     protected $ftps;
     public $archivos = [];
     public $data_connection = [
-        'port' => '',
-        'root' => '',
-        'host' => '',
-        'user' => '',
-        'password' => '',
+        'port' => '21',
+        'root' => '/prueba',
+        'host' => '192.168.0.195',
+        'user' => 'prueba',
+        'password' => '12345',
         'ssl' => true,
 
 
@@ -37,6 +39,14 @@ class Fpt extends Component
         return view('livewire.ftp.fpt');
     }
 
+    public function entryDirectory($directory){
+
+        $this->dispatch('post-created'); 
+        //$this->ftps->entryDirectory($directory);
+        
+       // $this->archivos = $this->ftps->listarArchivos();
+    }
+
     public function run()
     {
         
@@ -45,4 +55,7 @@ class Fpt extends Component
        
 
     }
+    
+   
+    
 }
