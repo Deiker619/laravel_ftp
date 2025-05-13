@@ -2,16 +2,14 @@
 
 namespace App\Services;
 
-use Livewire\Attributes\On;
-use Livewire\Component;
 
 
 
-class FtpsService extends Component
+class FtpsService 
 {
     protected $ftp;
-    public $directorio = '/prueba';
-    protected $listeners = ['post-created'=>'post-created'];
+    public $directorio = '/';
+    protected $listeners = ['post-created' => 'post-created'];
 
     public function connect($data_connections)
     {
@@ -21,25 +19,14 @@ class FtpsService extends Component
         $this->ftp->pasv(true);
     }
 
-    public function listarArchivos()
+    public function listarArchivos($directorio)
     {
-        return $files = $this->ftp->scanDir($this->directorio);
+        return $files = $this->ftp->scanDir($directorio);
     }
 
-    public function entryDirectory($directory)
+    
+    public function pwd()
     {
-
-
-        $this->directorio = $this->directorio . '/' . $directory;
-
-
-        // $this->listarArchivos();
-
-    }
-
-    #[On('post-created')]
-    public function Prueba()
-    {
-        return dd('desde services'); // Lista nombres de archivos en el directorio
+        return $this->directorio;
     }
 }
